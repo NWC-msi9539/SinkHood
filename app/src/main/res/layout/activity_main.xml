@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#191919"
+    tools:context=".Activities.MainActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="411dp"
+        tools:layout_editor_absoluteY="597dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="12"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/notosanskr_bold"
+                android:gravity="center"
+                android:paddingEnd="4dp"
+                android:text="APPS"
+                android:textAlignment="textEnd"
+                android:textColor="@color/white" />
+
+            <View
+                android:id="@+id/divider"
+                android:layout_width="2dp"
+                android:layout_height="14sp"
+                android:background="@color/start" />
+
+            <TextView
+                android:id="@+id/deviceNameTXT"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/notosanskr_bold"
+                android:gravity="center"
+                android:paddingStart="4dp"
+                android:text="내 기기이름"
+                android:textAlignment="textStart"
+                android:textColor="@color/white" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="10"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="3">
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="136dp"
+                    android:layout_height="136dp"
+                    android:layout_gravity="center"
+                    app:cardBackgroundColor="#232323"
+                    app:cardCornerRadius="300dp"
+                    app:cardElevation="0dp">
+
+                    <ImageButton
+                        android:id="@+id/powerBTN"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="?attr/selectableItemBackgroundBorderless"
+                        android:padding="24dp"
+                        android:scaleType="fitCenter"
+                        app:srcCompat="@drawable/power_w"
+                        tools:ignore="SpeakableTextPresentCheck" />
+                </androidx.cardview.widget.CardView>
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="3">
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="136dp"
+                    android:layout_height="136dp"
+                    android:layout_gravity="center"
+                    app:cardBackgroundColor="#232323"
+                    app:cardCornerRadius="200dp"
+                    app:cardElevation="0dp">
+
+                    <ImageButton
+                        android:id="@+id/lightBTN"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="?attr/selectableItemBackgroundBorderless"
+                        android:padding="24dp"
+                        android:scaleType="fitCenter"
+                        app:srcCompat="@drawable/sun_w"
+                        tools:ignore="SpeakableTextPresentCheck" />
+                </androidx.cardview.widget.CardView>
+            </FrameLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="10"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="3">
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="136dp"
+                    android:layout_height="136dp"
+                    android:layout_gravity="center"
+                    app:cardBackgroundColor="#232323"
+                    app:cardCornerRadius="200dp"
+                    app:cardElevation="0dp">
+
+                    <ImageButton
+                        android:id="@+id/uvBTN"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="?attr/selectableItemBackgroundBorderless"
+                        android:padding="24dp"
+                        android:scaleType="fitCenter"
+                        app:srcCompat="@drawable/uv_w"
+                        tools:ignore="SpeakableTextPresentCheck" />
+                </androidx.cardview.widget.CardView>
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="3">
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="136dp"
+                    android:layout_height="136dp"
+                    android:layout_gravity="center"
+                    app:cardBackgroundColor="#232323"
+                    app:cardCornerRadius="300dp"
+                    app:cardElevation="0dp">
+
+                    <ImageButton
+                        android:id="@+id/irBTN"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="?attr/selectableItemBackgroundBorderless"
+                        android:padding="24dp"
+                        android:scaleType="fitCenter"
+                        app:srcCompat="@drawable/ir_w"
+                        tools:ignore="SpeakableTextPresentCheck" />
+                </androidx.cardview.widget.CardView>
+            </FrameLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="10"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="3">
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="136dp"
+                    android:layout_height="136dp"
+                    android:layout_gravity="center"
+                    app:cardBackgroundColor="#232323"
+                    app:cardCornerRadius="300dp"
+                    app:cardElevation="0dp">
+
+                    <ImageButton
+                        android:id="@+id/fanBTN"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="?attr/selectableItemBackgroundBorderless"
+                        android:padding="24dp"
+                        android:scaleType="fitCenter"
+                        app:srcCompat="@drawable/fan_w"
+                        tools:ignore="SpeakableTextPresentCheck" />
+                </androidx.cardview.widget.CardView>
+            </FrameLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="3">
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardView2"
+                    android:layout_width="136dp"
+                    android:layout_height="136dp"
+                    android:layout_gravity="center"
+                    app:cardBackgroundColor="#232323"
+                    app:cardCornerRadius="200dp"
+                    app:cardElevation="0dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <Button
+                        android:id="@+id/timerBTN"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="?attr/selectableItemBackgroundBorderless"
+                        android:fontFamily="@font/notosanskr_regular"
+                        android:text="00:00"
+                        android:textColor="@color/white"
+                        android:textSize="32sp"
+                        app:rippleColor="@color/start" />
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardView"
+                    android:layout_width="44dp"
+                    android:layout_height="44dp"
+                    android:layout_gravity="end"
+                    app:cardBackgroundColor="#59DBDBDB"
+                    app:cardCornerRadius="22dp"
+                    app:cardElevation="0dp"
+                    app:contentPadding="8dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/cardView2"
+                    app:layout_constraintEnd_toEndOf="@+id/cardView2"
+                    app:layout_constraintHorizontal_bias="1.0"
+                    app:layout_constraintStart_toStartOf="@+id/cardView2"
+                    app:layout_constraintTop_toTopOf="@+id/cardView2"
+                    app:layout_constraintVertical_bias="0.0">
+
+                    <ImageView
+                        android:id="@+id/timerIMG"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:srcCompat="@drawable/time_w" />
+                </androidx.cardview.widget.CardView>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="12"
+            android:gravity="center|top"
+            android:orientation="horizontal">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="55dp"
+                android:layout_height="55dp"
+                android:layout_marginEnd="12dp"
+                app:cardBackgroundColor="#232323"
+                app:cardCornerRadius="33dp"
+                app:cardElevation="0dp">
+
+                <ImageButton
+                    android:id="@+id/settingBTN"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:padding="8dp"
+                    android:scaleType="fitCenter"
+                    app:srcCompat="@drawable/setting"
+                    tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="55dp"
+                android:layout_height="55dp"
+                android:layout_marginStart="12dp"
+                app:cardBackgroundColor="#232323"
+                app:cardCornerRadius="33dp"
+                app:cardElevation="0dp">
+
+                <ImageButton
+                    android:id="@+id/bluetoothBTN"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:padding="8dp"
+                    android:scaleType="fitCenter"
+                    app:srcCompat="@drawable/bluetooth"
+                    tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
+            </androidx.cardview.widget.CardView>
+        </LinearLayout>
+    </LinearLayout>
+</FrameLayout>
