@@ -280,10 +280,10 @@ public class SearchingBluetoothActivity extends AppCompatActivity {
         if(bluetoothPermissionTool.checkPermission()){
             Log.d("TESTING", "Permission ON");
             bluetoothSearchingTool.startScan(this);
+            timer.schedule(timerTask,0,100);
         }else{
             Log.d("TESTING", "Permission OUT");
+            Toast.makeText(getApplicationContext(), "블루투스 권한을 허용해주세요.", Toast.LENGTH_SHORT).show();
         }
-
-        timer.schedule(timerTask,0,100);
     }
 }

@@ -40,6 +40,7 @@ import nwc.hardware.Adapters.SearchingDeviceAdapter;
 import nwc.hardware.CHeaderTest;
 import nwc.hardware.Interfaces.OnGattListener;
 import nwc.hardware.Test;
+import nwc.hardware.bletool.BluetoothCommunicationTool;
 import nwc.hardware.bletool.BluetoothConnectingTool;
 import nwc.hardware.bletool.BluetoothPermissionTool;
 import nwc.hardware.bletool.BluetoothSearchingTool;
@@ -48,6 +49,8 @@ import nwc.hardware.sinkhood.Listeners.RemoteTimerClickListener;
 import nwc.hardware.sinkhood.R;
 
 public class MainActivity extends AppCompatActivity {
+    BluetoothCommunicationTool bluetoothCommunicationTool;
+
     private FrameLayout settingLayout;
 
     private ImageButton lightBTN;
@@ -103,6 +106,47 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 super.onClick(v);
+                BluetoothConnectingTool.getInstance(new OnGattListener() {
+                    @Override
+                    public void connectionStateConnecting(BluetoothGatt bluetoothGatt) {
+
+                    }
+
+                    @Override
+                    public void connectionStateConnected(BluetoothGatt bluetoothGatt) {
+
+                    }
+
+                    @Override
+                    public void connectionStateDisconnected(BluetoothGatt bluetoothGatt) {
+
+                    }
+
+                    @Override
+                    public void discoveredServices() {
+
+                    }
+
+                    @Override
+                    public void characteristicWrite(BluetoothGatt bluetoothGatt, BluetoothGattCharacteristic bluetoothGattCharacteristic, int i) {
+
+                    }
+
+                    @Override
+                    public void characteristicRead(BluetoothGatt bluetoothGatt, BluetoothGattCharacteristic bluetoothGattCharacteristic, int i) {
+
+                    }
+
+                    @Override
+                    public void characteristicChanged(BluetoothGatt bluetoothGatt, BluetoothGattCharacteristic bluetoothGattCharacteristic) {
+
+                    }
+
+                    @Override
+                    public void readRssi(BluetoothGatt bluetoothGatt, int i, int i1) {
+
+                    }
+                });
                 Log.d("TESTING", "powerBTN ON Click!");
             }
         });
