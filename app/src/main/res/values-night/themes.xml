@@ -5,7 +5,7 @@
         <item name="colorPrimary">#191919</item>
         <item name="colorPrimaryVariant">#191919</item>
         <item name="colorOnPrimary">#191919</item>
-        <item name="colorControlHighlight">#FF08FF8A</item>
+        <item name="colorControlHighlight">@color/end</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/teal_200</item>
         <item name="colorSecondaryVariant">@color/teal_200</item>

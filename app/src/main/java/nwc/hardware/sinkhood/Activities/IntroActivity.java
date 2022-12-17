@@ -3,6 +3,8 @@ package nwc.hardware.sinkhood.Activities;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.animation.AnimatorListenerAdapter;
+import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.graphics.LinearGradient;
 import android.graphics.Shader;
@@ -10,6 +12,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.TextView;
 
 import nwc.hardware.sinkhood.R;
@@ -32,6 +35,12 @@ public class IntroActivity extends AppCompatActivity {
         Shader shader = linearGradient;
 
         textView.getPaint().setShader(shader);
+
+        textView.animate()
+                .alpha(1f)
+                .setInterpolator(new AccelerateDecelerateInterpolator())
+                .setDuration(1500)
+                .start();
 
         Handler handler = new Handler(Looper.getMainLooper());
         handler.postDelayed(new Runnable() {

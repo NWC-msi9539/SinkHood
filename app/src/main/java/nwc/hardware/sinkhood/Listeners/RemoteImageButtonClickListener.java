@@ -6,29 +6,23 @@ import android.view.View;
 import android.widget.ImageButton;
 
 import nwc.hardware.sinkhood.R;
+import nwc.hardware.sinkhood.Resource.Data;
 
 public class RemoteImageButtonClickListener implements View.OnClickListener {
     private boolean active = false;
+    private int type = 0;
     private ImageButton parent;
     private Context mContext;
 
-    public RemoteImageButtonClickListener(ImageButton button, Context mContext){
+    public RemoteImageButtonClickListener(ImageButton button, Context mContext, int type){
         parent = button;
         this.mContext = mContext;
+        this.type = type;
     }
 
     @Override
     public void onClick(View v) {
-        repaint();
+
     }
 
-    @SuppressLint("ResourceType")
-    public void repaint(){
-        if(active){
-            parent.setBackground(null);
-        }else{
-            parent.setBackground(mContext.getDrawable(R.drawable. active_button_back));
-        }
-        active = !active;
-    }
 }

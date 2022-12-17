@@ -31,10 +31,10 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import nwc.hardware.Adapters.SearchingDeviceAdapter;
-import nwc.hardware.CHeaderTest;
+
 import nwc.hardware.Interfaces.OnGattListener;
-import nwc.hardware.Test;
-import nwc.hardware.bletool.BluetoothConnectingTool;
+
+import nwc.hardware.bletool.BluetoothGeneralTool;
 import nwc.hardware.bletool.BluetoothPermissionTool;
 import nwc.hardware.bletool.BluetoothSearchingTool;
 import nwc.hardware.sinkhood.R;
@@ -43,7 +43,7 @@ public class SearchingBluetoothActivity extends AppCompatActivity {
 
     private BluetoothSearchingTool bluetoothSearchingTool;
     private BluetoothPermissionTool bluetoothPermissionTool;
-    private BluetoothConnectingTool bluetoothConnectingTool;
+    private BluetoothGeneralTool bluetoothGeneralTool;
 
     private RecyclerView RCC;
     private TextView statusText;
@@ -96,6 +96,41 @@ public class SearchingBluetoothActivity extends AppCompatActivity {
         connectedDeviceNameText = findViewById(R.id.connectedDevice_name);
         connectedDeviceAddressText = findViewById(R.id.connectedDevice_address);
         connectedDeviceInfo = findViewById(R.id.connectedDevice);
+        connectedDeviceInfo.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                bluetoothGeneralTool.close();
+                timer = new Timer();
+                timerTask = new TimerTask() {
+                    @SuppressLint("MissingPermission")
+                    @Override
+                    public void run() {
+                        Handler handler = new Handler(Looper.getMainLooper());
+                        handler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                if(!bluetoothSearchingTool.isScanning()){
+                                    connectedDeviceInfo.setVisibility(View.GONE);
+                                    if (progressBar.getVisibility() == View.GONE) {
+                                        progressBar.setVisibility(View.VISIBLE);
+                                    }
+                                    statusText.setText("기기를 검색 중 입니다.");
+                                    bluetoothSearchingTool.startScan(SearchingBluetoothActivity.this);
+                                }
+                            }
+                        });
+                    }
+
+                    @Override
+                    public boolean cancel() {
+                        return super.cancel();
+                    }
+                };
+                timer.schedule(timerTask,0,100);
+                connectedDeviceInfo.setVisibility(View.GONE);
+                return false;
+            }
+        });
         swipeRefreshLayout = findViewById(R.id.SEARCHING_deviceLayout);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -128,7 +163,7 @@ public class SearchingBluetoothActivity extends AppCompatActivity {
                         return super.cancel();
                     }
                 };
-                timer.schedule(timerTask,0,100);
+                timer.schedule(timerTask,0,1000);
                 swipeRefreshLayout.setRefreshing(false);
             }
         });
@@ -169,71 +204,7 @@ public class SearchingBluetoothActivity extends AppCompatActivity {
                                                     }
                                                 });
 
-                                                bluetoothConnectingTool = BluetoothConnectingTool.getInstance(new OnGattListener() {
-                                                    @Override
-                                                    public void connectionStateConnecting(BluetoothGatt bluetoothGatt) {
-                                                        statusText.setText("연결 중 입니다.");
-                                                    }
-
-                                                    @Override
-                                                    public void connectionStateConnected(BluetoothGatt bluetoothGatt) {
-                                                        Handler handler = new Handler(Looper.getMainLooper());
-                                                        handler.post(new Runnable() {
-                                                            @Override
-                                                            public void run() {
-                                                                statusText.setText("연결 되었습니다.");
-                                                            }
-                                                        });
-                                                    }
-
-                                                    @Override
-                                                    public void connectionStateDisconnected(BluetoothGatt bluetoothGatt) {
-                                                        Handler handler = new Handler(Looper.getMainLooper());
-                                                        handler.post(new Runnable() {
-                                                            @Override
-                                                            public void run() {
-                                                                statusText.setText("연결이 끊겼습니다.");
-                                                            }
-                                                        });
-                                                    }
-
-                                                    @Override
-                                                    public void discoveredServices() {
-                                                        Handler handler = new Handler(Looper.getMainLooper());
-                                                        handler.post(new Runnable() {
-                                                            @Override
-                                                            public void run() {
-                                                                adapter.resetItem();
-                                                                BluetoothDevice device = bluetoothConnectingTool.getGatt().getDevice();
-                                                                connectedDeviceInfo.setVisibility(View.VISIBLE);
-                                                                connectedDeviceNameText.setText(device.getName());
-                                                                connectedDeviceAddressText.setText("(" + device.getAddress() + ")");
-                                                            }
-                                                        });
-                                                        Log.d("TESTING","연결 됌");
-                                                    }
-
-                                                    @Override
-                                                    public void characteristicWrite(BluetoothGatt bluetoothGatt, BluetoothGattCharacteristic bluetoothGattCharacteristic, int i) {
-                                                        Log.d("TESTING","(MAINACTIVITY)Write Success !! --> [" + bluetoothGattCharacteristic.getUuid() + "] " + new String(bluetoothGattCharacteristic.getValue()));
-                                                    }
-
-                                                    @Override
-                                                    public void characteristicRead(BluetoothGatt bluetoothGatt, BluetoothGattCharacteristic bluetoothGattCharacteristic, int i) {
-
-                                                    }
-
-                                                    @Override
-                                                    public void characteristicChanged(BluetoothGatt bluetoothGatt, BluetoothGattCharacteristic bluetoothGattCharacteristic) {
-
-                                                    }
-
-                                                    @Override
-                                                    public void readRssi(BluetoothGatt bluetoothGatt, int rssi, int status) {
-
-                                                    }
-                                                });
-                                                bluetoothConnectingTool.connect(device, SearchingBluetoothActivity.this);
+                                                bluetoothGeneralTool.connect(device, SearchingBluetoothActivity.this);
                                             }
 
                                         }
@@ -277,13 +248,131 @@ public class SearchingBluetoothActivity extends AppCompatActivity {
             }
         };
 
-        if(bluetoothPermissionTool.checkPermission()){
-            Log.d("TESTING", "Permission ON");
-            bluetoothSearchingTool.startScan(this);
-            timer.schedule(timerTask,0,100);
+        bluetoothGeneralTool = BluetoothGeneralTool.getInstance(new OnGattListener() {
+            @Override
+            public void connectionStateConnecting(BluetoothGatt bluetoothGatt) {
+                statusText.setText("연결 중 입니다.");
+                timer.cancel();
+                if(bluetoothSearchingTool.isScanning()) {
+                    bluetoothSearchingTool.stopScan(SearchingBluetoothActivity.this);
+                }
+            }
+
+            @Override
+            public void connectionStateConnected(BluetoothGatt bluetoothGatt) {
+                Handler handler = new Handler(Looper.getMainLooper());
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        statusText.setText("연결 되었습니다.");
+                    }
+                });
+            }
+
+            @Override
+            public void connectionStateDisconnected(BluetoothGatt bluetoothGatt) {
+                Handler handler = new Handler(Looper.getMainLooper());
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        statusText.setText("연결이 끊겼습니다.");
+                        timer = new Timer();
+                        timerTask = new TimerTask() {
+                            @SuppressLint("MissingPermission")
+                            @Override
+                            public void run() {
+                                Handler handler = new Handler(Looper.getMainLooper());
+                                handler.post(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        if(!bluetoothSearchingTool.isScanning()){
+                                            connectedDeviceInfo.setVisibility(View.GONE);
+                                            if (progressBar.getVisibility() == View.GONE) {
+                                                progressBar.setVisibility(View.VISIBLE);
+                                            }
+                                            statusText.setText("기기를 검색 중 입니다.");
+                                            bluetoothSearchingTool.startScan(SearchingBluetoothActivity.this);
+                                        }
+                                    }
+                                });
+                            }
+
+                            @Override
+                            public boolean cancel() {
+                                return super.cancel();
+                            }
+                        };
+                        timer.schedule(timerTask,0,100);
+                        connectedDeviceInfo.setVisibility(View.GONE);
+                    }
+                });
+            }
+
+            @Override
+            public void discoveredServices() {
+                Handler handler = new Handler(Looper.getMainLooper());
+                handler.post(new Runnable() {
+                    @SuppressLint("MissingPermission")
+                    @Override
+                    public void run() {
+                        bluetoothGeneralTool.setMAIN(1, -1);
+                        adapter.resetItem();
+                        BluetoothDevice device = bluetoothGeneralTool.getGatt().getDevice();
+                        connectedDeviceInfo.setVisibility(View.VISIBLE);
+                        connectedDeviceNameText.setText(device.getName());
+                        connectedDeviceAddressText.setText("(" + device.getAddress() + ")");
+                    }
+                });
+                Log.d("TESTING","연결 됌");
+            }
+
+            @Override
+            public void characteristicWrite(BluetoothGatt bluetoothGatt, BluetoothGattCharacteristic bluetoothGattCharacteristic, int i) {
+                Log.d("TESTING","(MAINACTIVITY)Write Success !! --> [" + bluetoothGattCharacteristic.getUuid() + "] " + new String(bluetoothGattCharacteristic.getValue()));
+            }
+
+            @Override
+            public void characteristicRead(BluetoothGatt bluetoothGatt, BluetoothGattCharacteristic bluetoothGattCharacteristic, int i) {
+
+            }
+
+            @Override
+            public void characteristicChanged(BluetoothGatt bluetoothGatt, BluetoothGattCharacteristic bluetoothGattCharacteristic) {
+
+            }
+
+            @Override
+            public void readRssi(BluetoothGatt bluetoothGatt, int rssi, int status) {
+
+            }
+        });
+
+        if(bluetoothGeneralTool.getGatt() == null){
+            if (bluetoothPermissionTool.checkPermission()) {
+                Log.d("TESTING", "Permission ON");
+                bluetoothSearchingTool.startScan(this);
+                timer.schedule(timerTask, 0, 100);
+            } else {
+                Log.d("TESTING", "Permission OUT");
+                Toast.makeText(getApplicationContext(), "블루투스 권한을 허용해주세요.", Toast.LENGTH_SHORT).show();
+            }
         }else{
-            Log.d("TESTING", "Permission OUT");
-            Toast.makeText(getApplicationContext(), "블루투스 권한을 허용해주세요.", Toast.LENGTH_SHORT).show();
+            statusText.setText("연결 되었습니다.");
+            progressBar.setVisibility(View.GONE);
+            BluetoothDevice device = bluetoothGeneralTool.getGatt().getDevice();
+            connectedDeviceInfo.setVisibility(View.VISIBLE);
+            connectedDeviceNameText.setText(device.getName());
+            connectedDeviceAddressText.setText("(" + device.getAddress() + ")");
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        progressBar.setVisibility(View.GONE);
+        timer.cancel();
+        if(bluetoothSearchingTool.isScanning()) {
+            bluetoothSearchingTool.stopScan(SearchingBluetoothActivity.this);
         }
     }
 }
