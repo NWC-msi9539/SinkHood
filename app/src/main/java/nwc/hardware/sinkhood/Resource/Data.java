@@ -79,15 +79,15 @@ public class Data {
         datas = newDatas;
     }
 
-    public byte[] getDataStream(){
+    public byte[] getDataStream(int type){
         byte[] dataStream = new byte[9];
         dataStream[0] = startByte;
-        if(datas[POWER]){ dataStream[1] = '1'; }else{ dataStream[1] = '0';}
-        if(datas[WHITE]){ dataStream[2] = '1'; }else{ dataStream[2] = '0';}
-        if(datas[FAN]){ dataStream[3] = '1'; }else{ dataStream[3] = '0';}
-        if(datas[TIMER]){ dataStream[4] = '1'; }else{ dataStream[4] = '0';}
-        if(datas[UV]){ dataStream[5] = '1'; }else{ dataStream[5] = '0';}
-        if(datas[IR]){ dataStream[6] = '1'; }else{ dataStream[6] = '0';}
+        if(type == POWER){ dataStream[1] = '1'; }else{ dataStream[1] = '0';}
+        if(type == WHITE){ dataStream[2] = '1'; }else{ dataStream[2] = '0';}
+        if(type == FAN){ dataStream[3] = '1'; }else{ dataStream[3] = '0';}
+        if(type == TIMER){ dataStream[4] = '1'; }else{ dataStream[4] = '0';}
+        if(type == UV){ dataStream[5] = '1'; }else{ dataStream[5] = '0';}
+        if(type == IR){ dataStream[6] = '1'; }else{ dataStream[6] = '0';}
         dataStream[7] = endByte[0];
         dataStream[8] = endByte[1];
 

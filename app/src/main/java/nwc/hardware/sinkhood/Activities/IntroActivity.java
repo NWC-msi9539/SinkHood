@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.view.animation.AccelerateDecelerateInterpolator;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import nwc.hardware.sinkhood.R;
@@ -25,8 +26,14 @@ public class IntroActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_intro);
 
-        TextView textView = findViewById(R.id.textView);
+        ImageView logo = findViewById(R.id.logoIMG);
+        logo.animate()
+                .alpha(1f)
+                .setInterpolator(new AccelerateDecelerateInterpolator())
+                .setDuration(1500)
+                .start();
 
+        /** 그레디언트 TextView
         int[] gradient = {getColor(R.color.end), getColor(R.color.start)};
         float[] position = {0, 1};
         Shader.TileMode tileMode = Shader.TileMode.MIRROR;
@@ -41,6 +48,7 @@ public class IntroActivity extends AppCompatActivity {
                 .setInterpolator(new AccelerateDecelerateInterpolator())
                 .setDuration(1500)
                 .start();
+         **/
 
         Handler handler = new Handler(Looper.getMainLooper());
         handler.postDelayed(new Runnable() {

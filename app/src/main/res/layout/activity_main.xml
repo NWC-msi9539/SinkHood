@@ -228,7 +228,7 @@
                         android:gravity="center"
                         android:includeFontPadding="false"
                         android:padding="8dp"
-                        android:text="Lv5"
+                        android:text="Lv0"
                         android:textColor="@color/white"
                         app:autoSizeMaxTextSize="24sp"
                         app:autoSizeMinTextSize="6sp"

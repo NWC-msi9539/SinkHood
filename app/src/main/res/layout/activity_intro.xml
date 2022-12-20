@@ -15,35 +15,23 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <Space
+        <ImageView
+            android:id="@+id/logoIMG"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="5" />
-
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="4"
+            android:layout_weight="5"
             android:alpha="0"
-            android:fontFamily="@font/notosanskr_bold"
-            android:gravity="center|top"
-            android:text="UVFAN"
-            android:textAlignment="center"
-            android:textColor="@color/white"
-            app:autoSizeMaxTextSize="50sp"
-            app:autoSizeMinTextSize="12sp"
-            app:autoSizeStepGranularity="2sp"
-            app:autoSizeTextType="uniform" />
+            android:padding="24dp"
+            app:srcCompat="@drawable/ss_solution" />
 
         <TextView
             android:id="@+id/textView2"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="6"
+            android:layout_height="wrap_content"
             android:fontFamily="@font/notosanskr_regular"
             android:gravity="center"
-            android:text="New World Computing"
+            android:padding="24dp"
+            android:text="SS Solution"
             android:textColor="@color/white" />
     </LinearLayout>
 

@@ -147,7 +147,6 @@ public class SearchingBluetoothActivity extends AppCompatActivity {
                             @Override
                             public void run() {
                                 if(!bluetoothSearchingTool.isScanning()){
-                                    connectedDeviceInfo.setVisibility(View.GONE);
                                     if (progressBar.getVisibility() == View.GONE) {
                                         progressBar.setVisibility(View.VISIBLE);
                                     }

@@ -82,6 +82,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void connectionStateDisconnected(BluetoothGatt bluetoothGatt) {
                 ConnectionTXT.setText("연결 끊김");
+                BluetoothGeneralTool.getInstance().close();
                 Data.getInstance().resetDatas();
                 repaintBTN();
             }
@@ -233,7 +234,7 @@ public class MainActivity extends AppCompatActivity {
                 Log.d("TESTING", "powerBTN ON Click!");
                 Data tool = Data.getInstance();
                 tool.switchData(Data.POWER);
-                bluetoothConnectingTool.Write(tool.getDataStream());
+                bluetoothConnectingTool.Write(tool.getDataStream(Data.POWER));
             }
         });
         lightBTN.setOnClickListener(new RemoteImageButtonClickListener(lightBTN, getApplicationContext(), Data.WHITE){
@@ -243,7 +244,7 @@ public class MainActivity extends AppCompatActivity {
                 Log.d("TESTING", "lightBTN ON Click!");
                 Data tool = Data.getInstance();
                 tool.switchData(Data.WHITE);
-                bluetoothConnectingTool.Write(tool.getDataStream());
+                bluetoothConnectingTool.Write(tool.getDataStream(Data.WHITE));
             }
         });
         uvBTN.setOnClickListener(new RemoteImageButtonClickListener(uvBTN, getApplicationContext(), Data.UV){
@@ -253,7 +254,7 @@ public class MainActivity extends AppCompatActivity {
                 Log.d("TESTING", "uvBTN ON Click!");
                 Data tool = Data.getInstance();
                 tool.switchData(Data.UV);
-                bluetoothConnectingTool.Write(tool.getDataStream());
+                bluetoothConnectingTool.Write(tool.getDataStream(Data.UV));
             }
         });
         irBTN.setOnClickListener(new RemoteImageButtonClickListener(irBTN, getApplicationContext(), Data.IR){
@@ -263,7 +264,7 @@ public class MainActivity extends AppCompatActivity {
                 Log.d("TESTING", "irBTN ON Click!");
                 Data tool = Data.getInstance();
                 tool.switchData(Data.IR);
-                bluetoothConnectingTool.Write(tool.getDataStream());
+                bluetoothConnectingTool.Write(tool.getDataStream(Data.IR));
             }
         });
         fanBTN.setOnClickListener(new RemoteFanClickListener(fanBTN, fanLVTXT, getApplicationContext()){
@@ -272,14 +273,7 @@ public class MainActivity extends AppCompatActivity {
                 super.onClick(v);
                 Log.d("TESTING", "fanBTN ON Click!");
                 Data tool = Data.getInstance();
-                int fanStep = tool.getFanStep();
-                if(fanStep == 9){
-                    tool.setData(Data.FAN, false);
-                }else{
-                    tool.setData(Data.FAN, true);
-                }
-
-                bluetoothConnectingTool.Write(tool.getDataStream());
+                bluetoothConnectingTool.Write(tool.getDataStream(Data.FAN));
             }
         });
         timerBTN.setOnClickListener(new RemoteTimerClickListener(mainTimer, subTimer, getApplicationContext()){
@@ -288,14 +282,7 @@ public class MainActivity extends AppCompatActivity {
                 super.onClick(v);
                 Log.d("TESTING", "timer ON Click!");
                 Data tool = Data.getInstance();
-                int time = tool.getTime();
-                if(time == 90){
-                    tool.setData(Data.TIMER, false);
-                }else{
-                    tool.setData(Data.TIMER, true);
-                }
-
-                bluetoothConnectingTool.Write(tool.getDataStream());
+                bluetoothConnectingTool.Write(tool.getDataStream(Data.TIMER));
             }
         });
 
